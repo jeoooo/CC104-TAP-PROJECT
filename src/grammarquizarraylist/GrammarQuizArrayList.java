@@ -24,54 +24,61 @@ public class GrammarQuizArrayList {
     public static void main(String[] args) {
         // TODO code application logic here
         Scanner answer = new Scanner(System.in);
-        String sentence1 = "this is a new sentence";
+        String[] questions = {"Why do you need _____ dollars?", "Please pursuade him _____ that", "Don't pretend _____ recognize me."};
 
-        ShuffleSentence(sentence1);
-        System.out.println("\nYour Answer: ");
-        String ans = answer.next();
-        
-        
-        //dili ko ka insert ug shufflesentence(sentence1) method sulod sa node tungod sa void data type
-        //basin i consider nlng nto by pre shuffled ang sentences by default 
-        // like i declare nato sya daan as 
-        // String sentence1 = "this sentence new a is";
-        //mag formulate nlng tag algorithm para icheck ang answer
-        
-        
-//        DNode<String> answer1 = new DNode<>(null,sentence1,null);
-//        
-//        MyArrayList<DNode> list = new MyArrayList<>();
-//        try {
-//            list.add(0, answer1);
-//            if(ans.equals(list.get(0).toString())){
-//                System.out.println("Wrong! The correct answer is " + sentence1);
-//            }
-//            else{
-//                System.out.println("Correct!");
-//            }
-//        } catch (InvalidIndexException e) {
-//            System.out.println(e.getMessage());
-//        }
-        
-        
+        int score = 0;
+        String PlayerAnswer;
+        DNode<String> choice1 = new DNode<>(null, "0.) hundred", null);
+        DNode<String> choice2 = new DNode<>(null, "1.) a hundred", null);
+        DNode<String> choice3 = new DNode<>(null, "2.) don't do", null);
+        DNode<String> choice4 = new DNode<>(null, "3.)not to do", null);
+        DNode<String> choice5 = new DNode<>(null, "4.) to not", null);
+        DNode<String> choice6 = new DNode<>(null, "5.) not to", null);
+
+        MyArrayList<DNode> ListOfChoices = new MyArrayList<>();
+
+        try {
+            ListOfChoices.add(0, choice1);
+            ListOfChoices.add(1, choice2);
+            ListOfChoices.add(2, choice3);
+            ListOfChoices.add(3, choice4);
+            ListOfChoices.add(4, choice5);
+            ListOfChoices.add(5, choice6);
+
+            for (int i = 0; i < questions.length; i++) {
+                int rand = new Random().nextInt(questions.length);
+
+                System.out.println("Match the correct grammar \n" + questions[rand] + "\n");
+                ListOfChoices.showList();
+                System.out.println("\nYour answer: ");
+                PlayerAnswer = answer.next();
+
+                if (questions[rand].contentEquals(questions[0])) {
+                    if (PlayerAnswer.equalsIgnoreCase("1")) {
+                        score++;
+                    }
+                }
+                if (questions[rand].contentEquals(questions[1])) {
+                    if (PlayerAnswer.equalsIgnoreCase("3")) {
+                        score++;
+                    }
+                }
+                if (questions[rand].contentEquals(questions[2])) {
+                    if (PlayerAnswer.equalsIgnoreCase("5")) {
+                        score++;
+                        ListOfChoices.showList();
+                    }
+                }
+
+            }
+
+            System.out.println("\n\n Quiz Finished\n");
+            System.out.println("Score: " + score + "/" + questions.length);
+
+        } catch (InvalidIndexException ex) {
+            System.out.println(ex.getMessage());
+        }
 
     }
 
-//    public static String[] shuffleSentences(String sentence){
-//        Random rand = new Random();
-//        String[] shufflesentence = sentence.split(" ");
-//        for (int i = 0; i < shufflesentence.length; i++) {
-//            int randomPosition = rand.nextInt(shufflesentence.length);
-//            String temp = shufflesentence[i];
-//            shufflesentence[i] = shufflesentence[randomPosition];
-//            shufflesentence[randomPosition] = temp;
-//        }
-//        
-//        return shufflesentence;
-//           
-//        for (int i = 0; i < wordArray.length; i++) {
-//            System.out.print(wordArray[i] + " ");
-//        }
-//        
-//    }
 }
