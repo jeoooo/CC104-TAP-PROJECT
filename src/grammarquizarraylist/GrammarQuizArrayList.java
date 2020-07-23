@@ -6,11 +6,9 @@
 package grammarquizarraylist;
 
 import doublylinkedlist.DNode;
-import static grammarquizarraylist.Sentence.ShuffleSentence;
+import singlylinkedlist.*;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -22,12 +20,20 @@ public class GrammarQuizArrayList {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+
+        /**
+         * @param args the command line arguments
+         */
         Scanner answer = new Scanner(System.in);
-        String[] questions = {"Why do you need _____ dollars?", "Please pursuade him _____ that", "Don't pretend _____ recognize me."};
+//        String[] questions = {"Why do you need _____ dollars?", "Please pursuade him _____ that", "Don't pretend _____ recognize me."};
 
         int score = 0;
         String PlayerAnswer;
+
+        SNode<String> question1 = new SNode<>("Why do you need _____ dollars?", null);
+        SNode<String> question2 = new SNode<>("Please pursuade him _____ that", null);
+        SNode<String> question3 = new SNode<>("Don't pretend _____ recognize me.", null);
+
         DNode<String> choice1 = new DNode<>(null, "0.) hundred", null);
         DNode<String> choice2 = new DNode<>(null, "1.) a hundred", null);
         DNode<String> choice3 = new DNode<>(null, "2.) don't do", null);
@@ -36,8 +42,18 @@ public class GrammarQuizArrayList {
         DNode<String> choice6 = new DNode<>(null, "5.) not to", null);
 
         MyArrayList<DNode> ListOfChoices = new MyArrayList<>();
+        QuestionLinkedStack<SNode> StackOfQuestions = new QuestionLinkedStack<>();
 
         try {
+            // ang stack is FIFO (first-in, first out)
+            // so kung mag push mo ug questions unahi sa jud ang last item which is si question10
+            //para ang last na ma push si question1 sya pud una ma pop
+            //pki insert lng diri ang questions :D
+
+            StackOfQuestions.push(question3);
+            StackOfQuestions.push(question2);
+            StackOfQuestions.push(question1);
+
             ListOfChoices.add(0, choice1);
             ListOfChoices.add(1, choice2);
             ListOfChoices.add(2, choice3);
@@ -45,40 +61,36 @@ public class GrammarQuizArrayList {
             ListOfChoices.add(4, choice5);
             ListOfChoices.add(5, choice6);
 
-            for (int i = 0; i < questions.length; i++) {
-                int rand = new Random().nextInt(questions.length);
+            System.out.println("Match the correct grammar \n");
+            System.out.println(StackOfQuestions.pop().getElement().toString());
+            ListOfChoices.showList();
+            System.out.println("\nYour answer: ");
+            PlayerAnswer = answer.next();
+            if (PlayerAnswer.equalsIgnoreCase("1")) { //scoring algorithm
+                score++; //correct answer: 1.) a hundred --------> SEE ARRAYLIST OF QUESTIONS FOR THE CHOICES :D
+            }
 
-                System.out.println("Match the correct grammar \n" + questions[rand] + "\n");
-                ListOfChoices.showList();
-                System.out.println("\nYour answer: ");
-                PlayerAnswer = answer.next();
+            System.out.println(StackOfQuestions.pop().getElement().toString());
+            ListOfChoices.showList();
+            System.out.println("\nYour answer: ");
+            PlayerAnswer = answer.next();
+            if (PlayerAnswer.equalsIgnoreCase("3")) {
+                score++;
+            }
 
-                if (questions[rand].contentEquals(questions[0])) {
-                    if (PlayerAnswer.equalsIgnoreCase("1")) {
-                        score++;
-                    }
-                }
-                if (questions[rand].contentEquals(questions[1])) {
-                    if (PlayerAnswer.equalsIgnoreCase("3")) {
-                        score++;
-                    }
-                }
-                if (questions[rand].contentEquals(questions[2])) {
-                    if (PlayerAnswer.equalsIgnoreCase("5")) {
-                        score++;
-                        ListOfChoices.showList();
-                    }
-                }
-
+            System.out.println(StackOfQuestions.pop().getElement().toString());
+            ListOfChoices.showList();
+            System.out.println("\nYour answer: ");
+            PlayerAnswer = answer.next();
+            if (PlayerAnswer.equalsIgnoreCase("5")) {
+                score++;
             }
 
             System.out.println("\n\n Quiz Finished\n");
-            System.out.println("Score: " + score + "/" + questions.length);
+            System.out.println("Score: " + score + "/" + "10");
 
         } catch (InvalidIndexException ex) {
             System.out.println(ex.getMessage());
         }
 
     }
-
-}

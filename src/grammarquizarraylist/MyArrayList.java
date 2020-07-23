@@ -42,19 +42,7 @@ public class MyArrayList<E> implements MyList<E>{
 
     @Override
     public void add(int i, E e) throws InvalidIndexException {
-//        if(i == 0){
-//                list.addBetween(list.getHeader(), (DNode) e, list.getHeader().getNext());
-//        }else if(i == 1){
-//            list.addBetween(list.getHeader().getNext(), (DNode) e, list.getHeader().getNext().getNext());
-//        }else if(i == 2){
-//            list.addBetween(list.getHeader().getNext().getNext(), (DNode) e, list.getTrailer());
-//        }else{
-//            throw new InvalidIndexException("Index is invalid.");
-//        }
 
-        // node1
-        // 0        1     2     4
-        //if zero
         DNode<E> temp = list.getHeader();
 
         for (int j = 0; j <= size(); j++) {
