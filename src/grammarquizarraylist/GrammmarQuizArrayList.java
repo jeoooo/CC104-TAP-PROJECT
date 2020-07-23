@@ -6,16 +6,15 @@
 package grammarquizarraylist;
 
 import doublylinkedlist.DNode;
-import singlylinkedlist.*;
-import java.util.Random;
 import java.util.Scanner;
+import singlylinkedlist.SNode;
 
 /**
  *
  * @author Jeo
  */
-public class GrammarQuizArrayList {
-
+public class GrammmarQuizArrayList {
+    
     /**
      * @param args the command line arguments
      */
@@ -94,3 +93,4 @@ public class GrammarQuizArrayList {
         }
 
     }
+}
